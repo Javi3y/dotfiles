@@ -1,0 +1,1 @@
+macro y set browser "( mpv --player-operation-mode=pseudo-gui -- %u & )"; one; set browser firefox
