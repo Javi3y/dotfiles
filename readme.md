@@ -1,0 +1,13 @@
+# My dotfiles 
+I have to clean my dotfiles first but having a repo isn't bad
+[!TIP] how to use:
+```bash
+git clone https://github.com/javi3y/dotfiles ~/dotfiles
+cd ~/dotfiles
+git submodule init
+git pull --recurse-submodules  && git submodule update --recursive
+stow zsh
+
+```
+
+
