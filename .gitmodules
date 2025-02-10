@@ -1,0 +1,6 @@
+[submodule "zsh/.zsh/spaceship"]
+	path = zsh/.zsh/spaceship
+	url = https://github.com/spaceship-prompt/spaceship-prompt.git
+[submodule "zsh/.zsh/zsh-autosuggestions"]
+	path = zsh/.zsh/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
