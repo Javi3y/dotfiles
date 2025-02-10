@@ -1,0 +1,5 @@
+#!/bin/bash
+if hyprctl -j monitors | jq -e '.[].name | select(.=="HDMI-A-2")' >/dev/null; then
+    hyprctl keyword monitor eDP-1, 1920x1080@60, 1080x1200, 1.50
+    hyprctl keyword monitor HDMI-A-2, 1920x1080@60, 0x0, 1.00,transform, 3
+fi

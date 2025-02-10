@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Directory containing wallpapers
+wallpaper_dir="$HOME/wallpapers"
+
+# File to store the last used wallpapers
+last_used_file="$HOME/.last_used_wallpapers"
+
+# Maximum number of wallpapers to track
+max_recent=30
+
+# Ensure the last used file exists
+touch "$last_used_file"
+
+# Read the last used wallpapers into an array
+mapfile -t last_used < "$last_used_file"
+
+# Get a list of all wallpapers (store both full paths and file names)
+wallpapers_full=($(find "$wallpaper_dir" -type f))
+wallpapers_names=($(basename -a "${wallpapers_full[@]}"))
+
+# Present a menu to choose a wallpaper (show only file names)
+echo "Select a wallpaper:"
+selected_name=$(printf "%s\n" "${wallpapers_names[@]}" | fzf --preview='kitty icat --clear --transfer-mode=memory --stdin=no --place="${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0" ~/wallpapers/{}')
+
+# If no selection is made, exit the script
+if [ -z "$selected_name" ]; then
+  echo "No wallpaper selected. Exiting."
+  exit 1
+fi
+
+# Find the full path of the selected wallpaper
+selected_wallpaper=""
+for i in "${!wallpapers_names[@]}"; do
+  if [ "${wallpapers_names[$i]}" == "$selected_name" ]; then
+    selected_wallpaper="${wallpapers_full[$i]}"
+    break
+  fi
+done
+
+# Apply the selected wallpaper using swaybg
+killall swaybg
+sed -i '/# BACKGROUND/,/# GENERAL/ s|^\( *path = \).*|\1'"$selected_wallpaper"'|' ~/.config/hypr/hyprlock.conf
+swaybg -i "$selected_wallpaper" -m fill &
+
+# Update the last used list
+last_used=("$selected_wallpaper" "${last_used[@]}")
+last_used=($(printf "%s\n" "${last_used[@]}" | awk '!seen[$0]++')) # Remove duplicates
+last_used=("${last_used[@]:0:$max_recent}") # Limit to the last used 
+
+# Save the updated list back to the file
+printf "%s\n" "${last_used[@]}" > "$last_used_file"
+
+echo "Wallpaper set to: $selected_wallpaper"

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Directory containing wallpapers
+wallpaper_dir="$HOME/wallpapers"
+
+# File to store the last used wallpapers
+last_used_file="$HOME/.last_used_wallpapers"
+
+# Maximum number of wallpapers to track
+max_recent=30
+
+# Ensure the last used file exists
+touch "$last_used_file"
+
+# Read the last used wallpapers into an array
+mapfile -t last_used < "$last_used_file"
+
+# Get a list of all wallpapers, excluding the last used ones
+wallpapers=($(find "$wallpaper_dir" -type f | grep -vFxf <(printf "%s\n" "${last_used[@]}")))
+
+# If no new wallpapers are available, reset the last used file
+if [ ${#wallpapers[@]} -eq 0 ]; then
+  echo "No new wallpapers available. Resetting the list."
+  > "$last_used_file"
+  wallpapers=($(find "$wallpaper_dir" -type f))
+fi
+
+# Pick a random wallpaper
+new_wallpaper="${wallpapers[RANDOM % ${#wallpapers[@]}]}"
+
+# Apply the new wallpaper using swaybg
+killall swaybg
+sed -i '/# BACKGROUND/,/# GENERAL/ s|^\( *path = \).*|\1'"$new_wallpaper"'|' ~/.config/hypr/hyprlock.conf
+swaybg -i "$new_wallpaper" -m fill &
+
+# Update the last used list
+last_used=("$new_wallpaper" "${last_used[@]}")
+last_used=($(printf "%s\n" "${last_used[@]}" | awk '!seen[$0]++')) # Remove duplicates
+last_used=("${last_used[@]:0:$max_recent}") # Limit to the last used
+
+# Save the updated list back to the file
+printf "%s\n" "${last_used[@]}" > "$last_used_file"
+
+echo "Wallpaper set to: $new_wallpaper"

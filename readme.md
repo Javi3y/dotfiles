@@ -8,6 +8,8 @@ I have to clean my dotfiles first but having a repo isn't bad
 >git submodule init
 >git pull --recurse-submodules  && git submodule update --recursive
 >stow zsh
+>stow hyprland
+>stow bin
 >```
 
 
