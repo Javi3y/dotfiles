@@ -13,11 +13,13 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source "$HOME/.zsh/spaceship/spaceship.zsh"
 # venv
 source "$HOME/.zsh/venv.sh"
+source <(fzf --zsh)
 # aliases
 alias k="kubectl"
 alias c="clear"
-alias vim=nvim
-alias rm=rm -i
+alias vim="nvim"
+alias svim="sudo nvim"
+alias rm="rm -i"
 alias ls="eza --icons=always"
 alias la="eza -A --icons=always"
 alias ll="eza -lh --icons=always"
@@ -33,6 +35,7 @@ alias auh="alembic upgrade head"
 
 alias git-graph="git log --graph --oneline --decorate --all --branches --remotes"
 alias gcb="git branch --show-current"
+alias cd-git='cd "$(git rev-parse --show-toplevel)"'
 
 function open(){
     nohup xdg-open $@ >/dev/null 2>&1 &
@@ -45,8 +48,11 @@ bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
 bindkey  "^[[3~"  delete-char
 
+bindkey -r "^R"
 bindkey -s "^R"   "ranger\n"
+bindkey -r "^N"
 bindkey -s "^N"   "nvim\n"
+bindkey -r "^T"
 bindkey -s "^T"   "tmux\n"
 
 # opts
@@ -71,4 +77,5 @@ export MANPAGER="nvim +Man!"
 
 autoload -Uz compinit
 compinit
+
 
