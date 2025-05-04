@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+import subprocess
+
+def get_windows():
+    """
+    Get a list of open windows using hyprctl.
+    Returns a list of tuples: (window_id, window_name)
+    """
+    try:
+        output = subprocess.check_output(["hyprctl", "clients"]).decode("utf-8")
+    except subprocess.CalledProcessError:
+        return []
+    
+    windows = []
+    for line in output.splitlines():
+        # Example output line (adjust parsing as needed):
+        # "0x60001a000: SomeApp | PID: 1234 | other info..."
+        if ':' not in line:
+            continue
+        parts = line.split(":", 1)
+        win_id = parts[0].strip()
+        # Assume the window name is before the first "|" character.
+        win_name = parts[1].split("|")[0].strip()
+        windows.append((win_id, win_name))
+    return windows
+
+def choose_window(windows):
+    """
+    Use rofi to let the user choose a window.
+    Returns the window_id of the selected window, or None.
+    """
+    # Format each line as "win_id: win_name"
+    lines = [f"{win_id}: {win_name}" for win_id, win_name in windows]
+    rofi_input = "\n".join(lines)
+    
+    try:
+        proc = subprocess.Popen(["rofi", "-dmenu", "-p", "Switch Window"],
+                                stdin=subprocess.PIPE,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+        stdout, _ = proc.communicate(input=rofi_input.encode("utf-8"))
+    except Exception as e:
+        print(f"Error running rofi: {e}")
+        return None
+
+    choice = stdout.decode("utf-8").strip()
+    if choice:
+        # Expect choice in format "win_id: win_name"
+        return choice.split(":", 1)[0].strip()
+    return None
+
+def focus_window(win_id):
+    """Focus the window with the given id using hyprctl."""
+    subprocess.run(["hyprctl", "dispatch", "focuswindow", win_id])
+
+def main():
+    windows = get_windows()
+    if not windows:
+        print("No windows found.")
+        return
+    win_id = choose_window(windows)
+    if win_id:
+        focus_window(win_id)
+    else:
+        print("No window selected.")
+
+if __name__ == "__main__":
+    main()

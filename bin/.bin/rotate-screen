@@ -1,0 +1,10 @@
+#!/bin/sh
+tr=$(hyprctl monitors -j | jq '.[] | select(.name == "eDP-1").transform')
+
+if [ $tr -eq 3 ]; then
+    hyprctl keyword monitor eDP-1, 1920x1080@60, 1080x1200, 1.50, transform, 0
+    hyprctl keyword "device[elan-touchscreen]":transform  0
+else
+    hyprctl keyword monitor eDP-1, 1920x1080@60, 1080x1200, 1.50, transform, 3
+    hyprctl keyword "device[elan-touchscreen]":transform  3
+fi

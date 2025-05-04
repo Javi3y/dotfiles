@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <direction>"
+    echo "Direction should be 'right' or 'left'."
+    exit 1
+fi
+
+direction=$1
+
+transform=$(hyprctl monitors -j | jq '.[] | select(.name == "HDMI-A-2").transform')
+
+if [ "$direction" == "right" ]; then
+    if (( transform % 2 == 0 )); then
+        hyprctl dispatch movecurrentworkspacetomonitor d
+    else
+        hyprctl dispatch movecurrentworkspacetomonitor r
+    fi
+elif [ "$direction" == "left" ]; then
+    if (( transform % 2 == 0 )); then
+        hyprctl dispatch movecurrentworkspacetomonitor u
+    else
+        hyprctl dispatch movecurrentworkspacetomonitor l
+    fi
+else
+    echo "Invalid direction: $direction"
+    echo "Direction should be 'right' or 'left'."
+    exit 1
+fi

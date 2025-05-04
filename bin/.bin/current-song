@@ -1,0 +1,5 @@
+#!/bin/bash
+current_artist=$(playerctl metadata | grep artist | awk '{ $1=$2=""; sub(/^ +/, ""); print }')
+current_song=$(playerctl metadata | grep title | awk '{ $1=$2=""; sub(/^ +/, ""); print }')
+echo "$current_artist $current_song" | wl-copy
+notify-send "$current_artist - $current_song"

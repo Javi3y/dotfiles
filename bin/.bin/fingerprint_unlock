@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Lock screen with Hyprlock
+hyprlock &  # Run it in the background
+HYPRLOCK_PID=$!  # Get the process ID of Hyprlock
+
+echo "Screen locked. Waiting for fingerprint authentication..."
+
+# Loop until fingerprint authentication succeeds
+while true; do
+    if fprintd-verify $USER; then
+        echo "Fingerprint verified! Unlocking..."
+        kill $HYPRLOCK_PID  # Kill Hyprlock to unlock the screen
+        break
+    fi
+    sleep 1  # Small delay to avoid excessive CPU usage
+done

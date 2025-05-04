@@ -1,0 +1,13 @@
+#!/bin/bash
+
+OLD_COUNT=$(sqlite3 ~/.config/newsboat/cache.db "SELECT COUNT(*) FROM rss_item;")
+
+newsboat -x reload
+
+NEW_COUNT=$(sqlite3 ~/.config/newsboat/cache.db "SELECT COUNT(*) FROM rss_item;")
+
+NEW_ARTICLES=$((NEW_COUNT - OLD_COUNT))
+
+if [ "$NEW_ARTICLES" -gt 0 ]; then
+    notify-send "Newsboat" "$NEW_ARTICLES new articles available!"
+fi

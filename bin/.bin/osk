@@ -1,0 +1,7 @@
+#!/bin/bash
+process=$(ps -C wvkbd-mobintl | tail -n +2 | awk '{print $1}')
+if [[ -z "$process" ]]; then
+    wvkbd-mobintl -L 250
+else
+    kill -9 $process
+fi

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+notify-send "Fetching data please wait"
+link="$(wl-paste)"
+title=$(yt-dlp --get-title "$link")
+
+if [ $? -eq 0 ]; then
+    notify-send "Now playing: $title"
+    mpv "$link"
+else
+    notify-send "Failed to fetch the title."
+fi
+
