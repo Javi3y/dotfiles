@@ -11,4 +11,6 @@ I have to clean my dotfiles first but having a repo isn't bad
 >stow hyprland
 >stow bin
 >stow waybar
+>cd ~/.config/waybar
+>cp sample-colors.css colors.css
 >```
