@@ -1,0 +1,14 @@
+{
+  "include": [
+    "$HOME/.config/waybar/settings.jsonc",
+    "$HOME/.config/waybar/modules/hyprland_workspaces.jsonc",
+    "$HOME/.config/waybar/modules/battery.jsonc",
+    "$HOME/.config/waybar/modules/idle_inhibitor.jsonc",
+    "$HOME/.config/waybar/modules/tray.jsonc",
+    "$HOME/.config/waybar/modules/clock.jsonc",
+    "$HOME/.config/waybar/modules/pulseaudio.jsonc",
+    "$HOME/.config/waybar/modules/custom/osk.jsonc",
+    "$HOME/.config/waybar/modules/custom/notification.jsonc",
+    "$HOME/.config/waybar/modules/custom/seperators.jsonc",
+  ],
+}

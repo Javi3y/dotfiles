@@ -1,0 +1,11 @@
+@keyframes blink-critical {
+  70% {
+    color: @fg;
+    background-color: @bg;
+  }
+
+  to {
+    color: @critical;
+    background-color: @bg;
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "custom/seperator-left": {
+    "format": " ",
+    "tooltip": false,
+  },
+  "custom/seperator-right": {
+    "format": " ",
+    "tooltip": false,
+  },
+}

@@ -1,0 +1,30 @@
+@import "blink-critical.css";
+@import "blink-warning.css";
+
+#mode,
+#memory,
+#temperature,
+#battery {
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.critical {
+  color: @critical;
+}
+
+#battery.critical.discharging {
+  animation-name: blink-critical;
+  animation-duration: 2s;
+}
+
+#battery.warning {
+  color: @warning;
+}
+
+#battery.warning.discharging {
+  animation-name: blink-warning;
+  animation-duration: 3s;
+}
+

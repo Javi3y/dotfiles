@@ -1,0 +1,14 @@
+@import "../colors.css";
+
+#pulseaudio {
+  margin-left: 0em;
+  padding-left: 0em;
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+}
+#pulseaudio.muted {
+  color: @red;
+}
+
+#pulseaudio.source-muted {
+}

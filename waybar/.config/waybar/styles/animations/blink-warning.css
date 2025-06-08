@@ -1,0 +1,11 @@
+@keyframes blink-warning {
+  70% {
+    color: @fg;
+    background-color: @bg;
+  }
+
+  to {
+    color: @warning;
+    background-color: @bg;
+  }
+}

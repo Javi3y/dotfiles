@@ -1,0 +1,25 @@
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 3,
+  "modules-left": [
+    "custom/seperator-left",
+    "battery",
+    "clock#time",
+    "idle_inhibitor",
+    "custom/seperator-right",
+  ],
+  "modules-center": [
+    "custom/seperator-left",
+    "hyprland/workspaces",
+    "custom/seperator-right",
+  ],
+  "modules-right": [
+    "custom/seperator-left",
+    "custom/notification",
+    "custom/osk",
+    "pulseaudio",
+    "tray",
+    "custom/seperator-right",
+  ],
+}

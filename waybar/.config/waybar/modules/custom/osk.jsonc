@@ -1,0 +1,7 @@
+{
+  "custom/osk": {
+    "format": "  ",
+    "on-click": "$HOME/.bin/osk",
+    "tooltip": false,
+  },
+}

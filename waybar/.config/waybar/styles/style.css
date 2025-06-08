@@ -1,0 +1,21 @@
+* {
+  border: none;
+  border-radius: 0px;
+  min-height: 0;
+}
+
+#battery,
+#custom-notification,
+#custom-osk,
+#clock,
+#pulseaudio,
+#tray,
+#language,
+#idle_inhibitor {
+  padding: 0em 0.3em;
+  background: @bg;
+  color: @fg;
+}
+@import "animations/main.css";
+@import "modules/main.css";
+@import "bar.css";
