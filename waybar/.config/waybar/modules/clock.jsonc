@@ -1,12 +1,8 @@
 {
   "clock#time": {
     "interval": 10,
-    "format": " {:%I:%M %p}",
+    "format": " {:%I:%M %p  %d %b}",
     "tooltip": false,
-  },
-  "clock#date": {
-    "interval": 20,
-    "format": "{: %a %e/%m}",
-    "on-click": "gnome-calendar",
+    "on-click": "~/.bin/cal_notif",
   },
 }

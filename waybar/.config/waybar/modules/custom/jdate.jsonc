@@ -1,0 +1,8 @@
+{
+  "custom/jdate": {
+    "interval": 10,
+    "format": "{text}",
+    "exec": "jdate +'%d %b'",
+    "on-click": "~/.bin/jcal_notif",
+  },
+}

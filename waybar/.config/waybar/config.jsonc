@@ -9,6 +9,7 @@
     "$HOME/.config/waybar/modules/pulseaudio.jsonc",
     "$HOME/.config/waybar/modules/custom/osk.jsonc",
     "$HOME/.config/waybar/modules/custom/notification.jsonc",
+    "$HOME/.config/waybar/modules/custom/jdate.jsonc",
     "$HOME/.config/waybar/modules/custom/seperators.jsonc",
   ],
 }

@@ -1,0 +1,8 @@
+#!/bin/bash
+# hyprctl dispatch exec "[float; size 170 150;move 90 35; nofocus]" "kitty -e bash -c 'jcal ; sleep 2'"
+hyprctl dispatch exec "[float; size 230 190; move 90 35; nofocus]" \
+"kitty --class calendar -o cursor_blink_interval=0 -o hide_cursor=yes \
+-o background_opacity=1.0 -o font_size=12.0 -o shell_integration=disabled \
+-e bash -c 'tput civis;jcal; sleep 2'"
+
+

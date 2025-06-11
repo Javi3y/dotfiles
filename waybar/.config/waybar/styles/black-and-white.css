@@ -1,0 +1,6 @@
+@define-color bg #FFFFFF;
+@define-color fg #000000;
+@define-color fg_light #444444;
+@define-color warning #FFFF00;
+@define-color critical #FF0000;
+@define-color red #FF0000;

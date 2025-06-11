@@ -1,0 +1,43 @@
+#!/bin/bash
+
+DIRECTION=$1
+
+INITIAL_SPEED=10
+ACCELERATION_FACTOR=5
+MAX_SPEED=80
+STATE_FILE="/tmp/mouse_move_speed_${DIRECTION}"
+
+
+if [ "$DIRECTION" == "reset" ]; then
+    rm -f /tmp/mouse_move_speed_*
+    exit 0
+fi
+
+if [ -f "$STATE_FILE" ]; then
+    CURRENT_SPEED=$(cat "$STATE_FILE")
+else
+    CURRENT_SPEED=$INITIAL_SPEED
+fi
+
+NEW_SPEED=$((CURRENT_SPEED + ACCELERATION_FACTOR))
+
+if [ "$NEW_SPEED" -gt "$MAX_SPEED" ]; then
+    NEW_SPEED=$MAX_SPEED
+fi
+
+case $DIRECTION in
+    left)
+        ydotool mousemove -- -"$CURRENT_SPEED" 0
+        ;;
+    down)
+        ydotool mousemove -- 0 "$CURRENT_SPEED"
+        ;;
+    up)
+        ydotool mousemove -- 0 -"$CURRENT_SPEED"
+        ;;
+    right)
+        ydotool mousemove -- "$CURRENT_SPEED" 0
+        ;;
+esac
+
+echo "$NEW_SPEED" > "$STATE_FILE"
