@@ -1,7 +1,4 @@
 require("mason").setup({})
-require("mason-lspconfig").setup({
-    ensure_installed = { "html", "gopls", "lua_ls", "pyright", "elixirls", "clangd" }
-})
 
 local lsp = require('lsp-zero')
 
@@ -14,7 +11,6 @@ require("lspconfig").pyright.setup({})
 require("lspconfig").elixirls.setup({})
 require("lspconfig").clangd.setup({})
 require("lspconfig").html.setup({})
-require("lspconfig").rust_analyzer.setup({})
 -- require("lspconfig").vuels.setup({})
 require("lspconfig").ts_ls.setup({})
 
@@ -33,7 +29,6 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = "codeium" },
         { name = 'path' },
         { name = 'buffer' },
         { name = 'luasnip', max_item_count = 10 },
@@ -48,4 +43,3 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "[d", function() vim.lsp.buf.goto_prev() end, opts)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
 end)
-

@@ -25,4 +25,3 @@ vim.opt.updatetime = 50
 vim.g.mapleader = " "
 
 vim.opt.foldlevelstart = 99
-
